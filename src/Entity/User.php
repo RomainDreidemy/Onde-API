@@ -6,7 +6,8 @@ use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
-use App\Controller\UserCreateController;
+use App\Controller\Api\User\UserCreateController;
+use App\Controller\Api\User\UserPasswordResetController;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
@@ -18,7 +19,17 @@ use App\Controller\UserCreateController;
             "path"="/users",
             "controller"=UserCreateController::class,
         }
+    },
+    itemOperations={
+        "get", "delete", "patch",
+        "pasword_reset"={
+            "method"="GET",
+            "path"="/users/password/reset/{id}",
+            "controller"=UserPasswordResetController::class,
+        }
     }
+
+
  * )
  */
 class User implements UserInterface
