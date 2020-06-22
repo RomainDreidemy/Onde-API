@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use App\Controller\Api\User\UserCreateController;
 use App\Controller\Api\User\UserPasswordResetController;
+use ApiPlatform\Core\Annotation\ApiProperty;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
@@ -43,39 +44,100 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
+        @ApiProperty(
+            attributes={
+                "openapi_context"={
+                    "type"="string",
+                    "example"="email@gmail.com"
+                }
+            }
+        )
      */
     private $email;
 
     /**
      * @ORM\Column(type="json")
+        @ApiProperty(
+            attributes={
+                "openapi_context"={
+                    "type"="array",
+                    "example"="['ROLE_USER', 'ROLE_ADMIN']"
+                }
+            }
+        )
      */
     private $roles = [];
 
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
+        @ApiProperty(
+            attributes={
+                "openapi_context"={
+                    "type"="string",
+                    "example"="my secret password"
+                }
+            }
+        )
      */
     private $password;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+        @ApiProperty(
+            attributes={
+                "openapi_context"={
+                    "type"="string",
+                    "example"="Romain"
+                }
+            }
+        )
      */
     private $surname;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+        @ApiProperty(
+            attributes={
+                "openapi_context"={
+                    "type"="string",
+                    "example"="Dreidemy"
+                }
+            }
+        )
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+        @ApiProperty(
+            attributes={
+                "openapi_context"={
+                    "type"="string",
+                    "example"="Fondateur et bénévol"
+                }
+            }
+        )
      */
     private $fonction;
 
     /**
      * @ORM\Column(type="boolean")
+        @ApiProperty(
+            attributes={
+                "openapi_context"={
+                    "type"="boolean",
+                    "example"=true
+                }
+            }
+        )
      */
     private $type;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $passwordToken;
 
     public function getId(): ?int
     {
@@ -199,6 +261,18 @@ class User implements UserInterface
     public function setType(bool $type): self
     {
         $this->type = $type;
+
+        return $this;
+    }
+
+    public function getPasswordToken(): ?string
+    {
+        return $this->passwordToken;
+    }
+
+    public function setPasswordToken(?string $passwordToken): self
+    {
+        $this->passwordToken = $passwordToken;
 
         return $this;
     }

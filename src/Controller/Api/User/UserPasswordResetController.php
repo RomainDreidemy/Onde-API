@@ -4,23 +4,46 @@ namespace App\Controller\Api\User;
 
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Address;
+use Symfony\Component\Mime\Email;
 
 class UserPasswordResetController extends AbstractController
 {
     private $manager;
-    private $encoder;
+    private $mailer;
 
-    public function __construct(EntityManagerInterface $entityManager)
+    public function __construct(EntityManagerInterface $entityManager, MailerInterface $mailer)
     {
         $this->manager = $entityManager;
+        $this->mailer = $mailer;
     }
 
     public function __invoke(User $data)
     {
-        // TODO: Create a code field
+        //Add a token for reset password
+        $token = bin2hex(random_bytes(15));
+        $data->setPasswordToken($token);
+        $this->manager->persist($data);
+        $this->manager->flush();
 
-        // TODO: Mail with a link for a new password
-        return $this->json(['Email envoyé']);
+        // Création de l'email
+        //TODO: Ajouter la vrai URL du front
+        $email = new TemplatedEmail();
+
+        $email
+            ->from('contact.onde.projet@gmail.com')
+            ->to(new Address($data->getEmail()))
+            ->subject('Onde - Réinitialisation de votre mot de passe')
+            ->htmlTemplate('mailer/reset-password.html.twig')
+            ->context([
+                'user' => $data
+            ]);
+
+        $this->mailer->send($email);
+
+        return $this->json(['message' => 'mail envoyé']);
     }
 }
