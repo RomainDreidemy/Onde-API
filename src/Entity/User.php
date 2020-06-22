@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use App\Controller\Api\User\UserCreateController;
 use App\Controller\Api\User\UserPasswordResetController;
+use App\Controller\Api\User\UserPasswordChangeController;
 use ApiPlatform\Core\Annotation\ApiProperty;
 
 /**
@@ -27,6 +28,11 @@ use ApiPlatform\Core\Annotation\ApiProperty;
             "method"="GET",
             "path"="/users/password/reset/{id}",
             "controller"=UserPasswordResetController::class,
+        },
+        "pasword_change"={
+            "method"="PATCH",
+            "path"="/users/password/change/{id}",
+            "controller"=UserPasswordChangeController::class,
         }
     }
 
@@ -61,7 +67,7 @@ class User implements UserInterface
             attributes={
                 "openapi_context"={
                     "type"="array",
-                    "example"="['ROLE_USER', 'ROLE_ADMIN']"
+                    "example"={"ROLE_USER", "ROLE_ADMIN"}
                 }
             }
         )
