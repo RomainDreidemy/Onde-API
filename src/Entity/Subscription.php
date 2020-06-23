@@ -2,11 +2,17 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Annotation\ApiProperty;
 use App\Repository\SubscriptionRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=SubscriptionRepository::class)
+ * @ApiResource(
+ *     collectionOperations={"get", "post"},
+ *     itemOperations={"get", "patch"}
+ * )
  */
 class Subscription
 {
@@ -20,12 +26,28 @@ class Subscription
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="subscriptions")
      * @ORM\JoinColumn(nullable=false)
+        @ApiProperty(
+            attributes={
+                "openapi_context"={
+                    "type"="relation",
+                    "example"="/api/users/1"
+                }
+            }
+        )
      */
     private $User;
 
     /**
      * @ORM\ManyToOne(targetEntity=Post::class, inversedBy="subscriptions")
      * @ORM\JoinColumn(nullable=false)
+        @ApiProperty(
+            attributes={
+                "openapi_context"={
+                    "type"="relation",
+                    "example"="/api/posts/1"
+                }
+            }
+        )
      */
     private $Post;
 
