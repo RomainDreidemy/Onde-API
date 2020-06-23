@@ -119,11 +119,17 @@ class Post
      */
     private $likes;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Subscription::class, mappedBy="Post", orphanRemoval=true)
+     */
+    private $subscriptions;
+
     public function __construct()
     {
         $this->comments = new ArrayCollection();
         $this->tags = new ArrayCollection();
         $this->likes = new ArrayCollection();
+        $this->subscriptions = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -299,6 +305,37 @@ class Post
             // set the owning side to null (unless already changed)
             if ($like->getPost() === $this) {
                 $like->setPost(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Subscription[]
+     */
+    public function getSubscriptions(): Collection
+    {
+        return $this->subscriptions;
+    }
+
+    public function addSubscription(Subscription $subscription): self
+    {
+        if (!$this->subscriptions->contains($subscription)) {
+            $this->subscriptions[] = $subscription;
+            $subscription->setPost($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSubscription(Subscription $subscription): self
+    {
+        if ($this->subscriptions->contains($subscription)) {
+            $this->subscriptions->removeElement($subscription);
+            // set the owning side to null (unless already changed)
+            if ($subscription->getPost() === $this) {
+                $subscription->setPost(null);
             }
         }
 
