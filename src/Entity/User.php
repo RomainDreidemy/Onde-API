@@ -12,20 +12,26 @@ use App\Controller\Api\User\UserCreateController;
 use App\Controller\Api\User\UserPasswordResetController;
 use App\Controller\Api\User\UserPasswordChangeController;
 use ApiPlatform\Core\Annotation\ApiProperty;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @ApiResource(
+    normalizationContext={"read"},
     collectionOperations={
         "get",
         "post"={
             "method"="POST",
             "path"="/users",
             "controller"=UserCreateController::class,
+            "denormalization_context"={"groups"={"post"}}
         }
     },
     itemOperations={
-        "get", "delete", "patch",
+        "get", "delete",
+        "patch"={
+            "denormalization_context"={"groups"={"patch"}}
+        },
         "pasword_reset"={
             "method"="GET",
             "path"="/users/password/reset/{id}",
@@ -35,6 +41,7 @@ use ApiPlatform\Core\Annotation\ApiProperty;
             "method"="PATCH",
             "path"="/users/password/change/{id}",
             "controller"=UserPasswordChangeController::class,
+            "denormalization_context"={"groups"={"password"}}
         }
     }
 
@@ -47,11 +54,13 @@ class User implements UserInterface
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups({"get"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
+     * @Groups({"get", "post", "patch"})
         @ApiProperty(
             attributes={
                 "openapi_context"={
@@ -65,6 +74,7 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="json")
+     * @Groups({"get", "post", "patch"})
         @ApiProperty(
             attributes={
                 "openapi_context"={
@@ -79,6 +89,7 @@ class User implements UserInterface
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
+     * @Groups({"password", "post"})
         @ApiProperty(
             attributes={
                 "openapi_context"={
@@ -92,6 +103,7 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"get", "post", "patch"})
         @ApiProperty(
             attributes={
                 "openapi_context"={
@@ -105,6 +117,7 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"get", "post", "patch"})
         @ApiProperty(
             attributes={
                 "openapi_context"={
@@ -118,6 +131,7 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"get", "post", "patch"})
         @ApiProperty(
             attributes={
                 "openapi_context"={
@@ -131,6 +145,7 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="boolean")
+     * @Groups({"get", "post"})
         @ApiProperty(
             attributes={
                 "openapi_context"={
@@ -144,26 +159,63 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Groups("get")
      */
     private $passwordToken;
 
     /**
      * @ORM\OneToMany(targetEntity=Post::class, mappedBy="User", orphanRemoval=true)
+     * @Groups({"get", "post", "patch"})
+        @ApiProperty(
+            attributes={
+                "openapi_context"={
+                    "type"="relation",
+                    "example"="/api/posts/1"
+                }
+            }
+        )
      */
     private $posts;
 
     /**
      * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="User", orphanRemoval=true)
+     * @Groups({"get", "post", "patch"})
+            @ApiProperty(
+                attributes={
+                "openapi_context"={
+                    "type"="relation",
+                    "example"="/api/comments/1"
+                }
+            }
+        )
      */
     private $comments;
 
     /**
      * @ORM\OneToMany(targetEntity=Like::class, mappedBy="User")
+     * @Groups({"get", "post", "patch"})
+        @ApiProperty(
+            attributes={
+                "openapi_context"={
+                    "type"="relation",
+                    "example"="/api/likes/1"
+                }
+            }
+        )
      */
     private $likes;
 
     /**
      * @ORM\OneToMany(targetEntity=Subscription::class, mappedBy="User", orphanRemoval=true)
+     * @Groups({"get", "post", "patch"})
+        @ApiProperty(
+            attributes={
+                "openapi_context"={
+                    "type"="relation",
+                    "example"="/api/subscriptions/1"
+                }
+            }
+        )
      */
     private $subscriptions;
 
