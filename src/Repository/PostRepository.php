@@ -20,7 +20,7 @@ class PostRepository extends ServiceEntityRepository
     }
 
     // /**
-    //  * @return Post[] Returns an array of Post objects
+    //  * @return PostFixtures[] Returns an array of PostFixtures objects
     //  */
     /*
     public function findByExampleField($value)
@@ -37,7 +37,7 @@ class PostRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?Post
+    public function findOneBySomeField($value): ?PostFixtures
     {
         return $this->createQueryBuilder('p')
             ->andWhere('p.exampleField = :val')

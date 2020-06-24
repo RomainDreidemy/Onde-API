@@ -7,7 +7,7 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
-class UserFixtures extends Fixture
+class UserFixtures extends AppFixtures
 {
     private $encoder;
 
@@ -16,17 +16,15 @@ class UserFixtures extends Fixture
         $this->encoder = $encoder;
     }
 
-    public function load(ObjectManager $manager)
+    public function loadData(ObjectManager $manager)
     {
         // User administrateur
         $usersAdmin = [
-            [
-                'email' => 'romain.dreidemy@gmail.com',
-                'surname' => 'Romain',
-                'name' => 'Dreidemy',
-                'type' => false,
-                'password' => 'romain'
-            ]
+            ['email' => 'romain.dreidemy@hetic.net', 'surname' => 'Romain', 'name' => 'Dreidemy', 'type' => false, 'password' => 'onde'],
+            ['email' => 'emma.cassagnettes@hetic.net', 'surname' => 'Emma', 'name' => 'Cassagnettesx', 'type' => false, 'password' => 'onde'],
+            ['email' => 'victor.balducci@hetic.net', 'surname' => 'Victor', 'name' => 'Balducci', 'type' => false, 'password' => 'onde'],
+            ['email' => 'camille.marquand@hetic.net', 'surname' => 'Camille', 'name' => 'Marquand', 'type' => false, 'password' => 'onde'],
+            ['email' => 'fiona.roux@hetic.net', 'surname' => 'Fiona', 'name' => 'Roux', 'type' => false, 'password' => 'onde'],
         ];
 
         foreach ($usersAdmin as $userAdmin){
@@ -43,39 +41,19 @@ class UserFixtures extends Fixture
             $manager->persist($user);
         }
 
-        // User standard
-        for ($i = 0; $i < 10; $i++){
+        $this->createMany(20, 'User', function (){
             $user = new User();
-
             $user
-                ->setEmail('onde' . $i . '@gmail.com')
-                ->setName('Onde' . $i)
-                ->setSurname('Onde' . $i)
-                ->setRoles(['ROLE_USER'])
-                ->setType(false)
-                ->setPassword($this->encoder->encodePassword($user, 'Onde' . $i))
+                ->setEmail($this->faker->email)
+                ->setName($this->faker->name)
+                ->setSurname($this->faker->firstName)
+                ->setType($this->faker->randomElement([true, false]))
+                ->setFonction($this->faker->jobTitle)
+                ->setPassword($this->encoder->encodePassword($user, 'userPassword'))
             ;
 
-            $manager->persist($user);
-        }
-
-        //User partenaire
-        for ($i = 0; $i < 3; $i++){
-            $user = new User();
-
-            $user
-                ->setEmail('onde-partenaire' . $i . '@gmail.com')
-                ->setName('partenaire' . $i)
-                ->setSurname('Opartenairende' . $i)
-                ->setRoles(['ROLE_USER'])
-                ->setType(true)
-                ->setPassword($this->encoder->encodePassword($user, 'Partenaire' . $i))
-            ;
-
-            $manager->persist($user);
-        }
-
-
+            return $user;
+        });
 
         $manager->flush();
     }

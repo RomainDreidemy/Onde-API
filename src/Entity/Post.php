@@ -105,22 +105,22 @@ class Post
     private $User;
 
     /**
-     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="Post", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="PostFixtures", orphanRemoval=true)
      */
     private $comments;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Tags::class, mappedBy="Post")
+     * @ORM\ManyToMany(targetEntity=Tags::class, mappedBy="PostFixtures")
      */
     private $tags;
 
     /**
-     * @ORM\OneToMany(targetEntity=Like::class, mappedBy="Post")
+     * @ORM\OneToMany(targetEntity=Like::class, mappedBy="PostFixtures")
      */
     private $likes;
 
     /**
-     * @ORM\OneToMany(targetEntity=Subscription::class, mappedBy="Post", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Subscription::class, mappedBy="PostFixtures", orphanRemoval=true)
      */
     private $subscriptions;
 
