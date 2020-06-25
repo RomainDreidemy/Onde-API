@@ -105,24 +105,30 @@ class Post
     private $User;
 
     /**
-     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="PostFixtures", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="Post", orphanRemoval=true)
      */
     private $comments;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Tags::class, mappedBy="PostFixtures")
+     * @ORM\ManyToMany(targetEntity=Tags::class, mappedBy="Post")
      */
     private $tags;
 
     /**
-     * @ORM\OneToMany(targetEntity=Like::class, mappedBy="PostFixtures")
+     * @ORM\OneToMany(targetEntity=Like::class, mappedBy="Post")
      */
     private $likes;
 
     /**
-     * @ORM\OneToMany(targetEntity=Subscription::class, mappedBy="PostFixtures", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Subscription::class, mappedBy="Post", orphanRemoval=true)
      */
     private $subscriptions;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Department::class, inversedBy="Post")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $department;
 
     public function __construct()
     {
@@ -338,6 +344,18 @@ class Post
                 $subscription->setPost(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getDepartment(): ?Department
+    {
+        return $this->department;
+    }
+
+    public function setDepartment(?Department $department): self
+    {
+        $this->department = $department;
 
         return $this;
     }

@@ -41,7 +41,7 @@ class UserFixtures extends AppFixtures
             $manager->persist($user);
         }
 
-        $this->createMany(20, 'User', function (){
+        $this->createMany(20, 'user', function (){
             $user = new User();
             $user
                 ->setEmail($this->faker->email)

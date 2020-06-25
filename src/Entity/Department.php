@@ -3,20 +3,16 @@
 namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
-use App\Repository\TagsRepository;
+use App\Repository\DepartmentRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use ApiPlatform\Core\Annotation\ApiProperty;
 
 /**
- * @ORM\Entity(repositoryClass=TagsRepository::class)
- * @ApiResource(
- *     collectionOperations={"get"},
- *     itemOperations={"get"}
- * )
+ * @ORM\Entity(repositoryClass=DepartmentRepository::class)
+ * @ApiResource()
  */
-class Tags
+class Department
 {
     /**
      * @ORM\Id()
@@ -27,34 +23,18 @@ class Tags
 
     /**
      * @ORM\Column(type="string", length=255)
-        @ApiProperty(
-            attributes={
-                "openapi_context"={
-                    "type"="string",
-                    "example"="Plage"
-                }
-            }
-        )
      */
     private $name;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Post::class, inversedBy="tags")
-        @ApiProperty(
-            attributes={
-                "openapi_context"={
-                    "type"="relation",
-                    "example"="/api/posts/1"
-                }
-            }
-        )
+     * @ORM\Column(type="string")
      */
-    private $Post;
+    private $code;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\OneToMany(targetEntity=Post::class, mappedBy="department")
      */
-    private $color;
+    private $Post;
 
     public function __construct()
     {
@@ -78,6 +58,18 @@ class Tags
         return $this;
     }
 
+    public function getCode(): ?string
+    {
+        return $this->code;
+    }
+
+    public function setCode(string $code): self
+    {
+        $this->code = $code;
+
+        return $this;
+    }
+
     /**
      * @return Collection|Post[]
      */
@@ -90,6 +82,7 @@ class Tags
     {
         if (!$this->Post->contains($post)) {
             $this->Post[] = $post;
+            $post->setDepartment($this);
         }
 
         return $this;
@@ -99,19 +92,11 @@ class Tags
     {
         if ($this->Post->contains($post)) {
             $this->Post->removeElement($post);
+            // set the owning side to null (unless already changed)
+            if ($post->getDepartment() === $this) {
+                $post->setDepartment(null);
+            }
         }
-
-        return $this;
-    }
-
-    public function getColor(): ?string
-    {
-        return $this->color;
-    }
-
-    public function setColor(?string $color): self
-    {
-        $this->color = $color;
 
         return $this;
     }
