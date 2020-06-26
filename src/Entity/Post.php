@@ -8,11 +8,18 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use ApiPlatform\Core\Annotation\ApiProperty;
+use App\Controller\Api\Post\PostTopController;
 
 /**
  * @ORM\Entity(repositoryClass=PostRepository::class)
  * @ApiResource(
- *     collectionOperations={"get", "post"},
+ *     collectionOperations={"get", "post",
+            "post"={
+                "method"="GET",
+                "path"="/post/top",
+                "controller"=PostTopController::class,
+            }
+ *     },
  *     itemOperations={"get", "patch"}
  * )
  */
@@ -130,12 +137,18 @@ class Post
      */
     private $department;
 
+    /**
+     * @ORM\OneToMany(targetEntity=PostGoal::class, mappedBy="Post")
+     */
+    private $postGoals;
+
     public function __construct()
     {
         $this->comments = new ArrayCollection();
         $this->tags = new ArrayCollection();
         $this->likes = new ArrayCollection();
         $this->subscriptions = new ArrayCollection();
+        $this->postGoals = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -356,6 +369,37 @@ class Post
     public function setDepartment(?Department $department): self
     {
         $this->department = $department;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|PostGoal[]
+     */
+    public function getPostGoals(): Collection
+    {
+        return $this->postGoals;
+    }
+
+    public function addPostGoal(PostGoal $postGoal): self
+    {
+        if (!$this->postGoals->contains($postGoal)) {
+            $this->postGoals[] = $postGoal;
+            $postGoal->setPost($this);
+        }
+
+        return $this;
+    }
+
+    public function removePostGoal(PostGoal $postGoal): self
+    {
+        if ($this->postGoals->contains($postGoal)) {
+            $this->postGoals->removeElement($postGoal);
+            // set the owning side to null (unless already changed)
+            if ($postGoal->getPost() === $this) {
+                $postGoal->setPost(null);
+            }
+        }
 
         return $this;
     }

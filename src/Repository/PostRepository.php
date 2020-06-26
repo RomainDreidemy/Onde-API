@@ -19,6 +19,21 @@ class PostRepository extends ServiceEntityRepository
         parent::__construct($registry, Post::class);
     }
 
+    public function findByTop(int $nb)
+    {
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery(
+            'SELECT p
+            FROM App\Entity\Post p
+            LEFT JOIN p.likes l
+            GROUP BY p.id
+            ORDER BY count(l.id) DESC'
+        )->setMaxResults($nb);
+
+        return $query->getResult();
+    }
+
     // /**
     //  * @return Post[] Returns an array of Post objects
     //  */
