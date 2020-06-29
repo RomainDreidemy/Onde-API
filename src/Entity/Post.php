@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\PostRepository;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -10,6 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
 use ApiPlatform\Core\Annotation\ApiProperty;
 use App\Controller\Api\Post\PostTopController;
 use App\Controller\Api\Comment\CommentGetCollectionWithUserController;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 
 /**
  * @ORM\Entity(repositoryClass=PostRepository::class)
@@ -29,6 +31,7 @@ use App\Controller\Api\Comment\CommentGetCollectionWithUserController;
             }
         }
  * )
+ * @ApiFilter(SearchFilter::class, properties={"department":"exact"})
  */
 class Post
 {
