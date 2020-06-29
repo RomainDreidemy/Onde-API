@@ -8,12 +8,18 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use ApiPlatform\Core\Annotation\ApiProperty;
+use App\Controller\Api\Comment\CommentGetWithUserController;
+use App\Controller\Api\Comment\CommentGetCollectionWithUserController;
 
 /**
  * @ORM\Entity(repositoryClass=CommentRepository::class)
  * @ApiResource(
  *     collectionOperations={"get", "post"},
- *     itemOperations={"get", "patch"}
+ *     itemOperations={"get"={
+            "method"="GET",
+            "path"="/comments/{id}",
+            "controller"=CommentGetWithUserController::class
+        }, "patch"}
  * )
  */
 class Comment

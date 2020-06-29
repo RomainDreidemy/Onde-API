@@ -9,18 +9,25 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use ApiPlatform\Core\Annotation\ApiProperty;
 use App\Controller\Api\Post\PostTopController;
+use App\Controller\Api\Comment\CommentGetCollectionWithUserController;
 
 /**
  * @ORM\Entity(repositoryClass=PostRepository::class)
  * @ApiResource(
  *     collectionOperations={"get", "post",
-            "post"={
+            "top"={
                 "method"="GET",
                 "path"="/post/top",
                 "controller"=PostTopController::class,
             }
  *     },
- *     itemOperations={"get", "patch"}
+ *     itemOperations={"get", "patch",
+            "get"={
+                "method"="GET",
+                "path"="/posts/{id}/comments",
+                "controller"=CommentGetCollectionWithUserController::class
+            }
+        }
  * )
  */
 class Post

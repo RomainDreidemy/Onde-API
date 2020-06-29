@@ -42,6 +42,11 @@ class PostGoal
      */
     private $Post;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $done;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -91,6 +96,18 @@ class PostGoal
     public function setPost(?Post $Post): self
     {
         $this->Post = $Post;
+
+        return $this;
+    }
+
+    public function getDone(): ?bool
+    {
+        return $this->done;
+    }
+
+    public function setDone(bool $done): self
+    {
+        $this->done = $done;
 
         return $this;
     }

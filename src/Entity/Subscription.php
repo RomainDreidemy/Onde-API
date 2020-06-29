@@ -6,11 +6,18 @@ use ApiPlatform\Core\Annotation\ApiResource;
 use ApiPlatform\Core\Annotation\ApiProperty;
 use App\Repository\SubscriptionRepository;
 use Doctrine\ORM\Mapping as ORM;
+use App\Controller\Api\Subscription\SubscriptionAddController;
 
 /**
  * @ORM\Entity(repositoryClass=SubscriptionRepository::class)
  * @ApiResource(
- *     collectionOperations={"get", "post"},
+ *     collectionOperations={"get",
+        "post"={
+            "method"="POST",
+            "path"="/subscriptions/",
+            "controller"=SubscriptionAddController::class,
+        }
+ *     },
  *     itemOperations={"get", "patch"}
  * )
  */
