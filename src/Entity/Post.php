@@ -31,7 +31,7 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
             }
         }
  * )
- * @ApiFilter(SearchFilter::class, properties={"department":"exact"})
+ * @ApiFilter(SearchFilter::class, properties={"department":"exact", "tags":"exact", "User":"exact"})
  */
 class Post
 {
