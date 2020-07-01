@@ -5,6 +5,8 @@ namespace App\Entity;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\PostGoalRepository;
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Core\Annotation\ApiFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 
 /**
  * @ORM\Entity(repositoryClass=PostGoalRepository::class)
@@ -12,6 +14,8 @@ use Doctrine\ORM\Mapping as ORM;
  *     collectionOperations={"get","post"},
  *     itemOperations={"get", "patch", "delete"}
  * )
+ * @ApiFilter(SearchFilter::class, properties={"Post": "exact"})
+
  */
 class PostGoal
 {
