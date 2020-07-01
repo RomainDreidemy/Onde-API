@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Api\Post;
 
 use App\Entity\Comment;
 use App\Entity\Post;
@@ -10,10 +10,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
-class HomeController extends AbstractController
+class PostFilterController extends AbstractController
 {
     /**
-     * @Route("/", name="home")
+     * @Route("/api/posts/filter", name="postFilter")
      */
     public function index(EntityManagerInterface $entityManager, Request $request)
     {
