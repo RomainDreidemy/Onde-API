@@ -51,12 +51,12 @@ class PostRepository extends ServiceEntityRepository
         if(!empty($params)){
             $i=1;
             $j = 1;
+            $k=1;
             $valuesForParam = [];
-            foreach($params as $param){
+            foreach($params as $key => $param){
                 if(!is_null($param)){
-                    if(key($params) === 'department'){
-
-
+                    $paramAllow = ['department', 'tags', 'User', 'validated'];
+                    if(in_array($key, $paramAllow)){
                         if($j !== 1){
                             $queryString .= ' AND ';
                         }else{
@@ -65,18 +65,21 @@ class PostRepository extends ServiceEntityRepository
 
                         $queryString .= '(';
 
-                        foreach ($params[key($params)] as $item){
+                        foreach ($params[$key] as $item){
 
                             if($i !== 1){
                                 $queryString .= ' OR ';
                             }
 
-                            $where = 'p.' . key($params) . ' = :field' . $i;
+                            $where = 'p.' . $key . ' = :field' . $k;
                             $queryString .= $where;
                             $valuesForParam[] = $item;
                             $i++;
+                            $k++;
                         }
                         $queryString .= ')';
+                        $i=1;
+                        $j++;
                     }
                 }
             }
@@ -113,13 +116,8 @@ class PostRepository extends ServiceEntityRepository
 
 
         if(!is_null($limit)){
-            dump($limit);
             $query->setMaxResults($limit);
         }
-
-
-
-        dump($query->getSQL());
 
         $posts = $query->getResult();
 

@@ -24,14 +24,14 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
             }
  *     },
  *     itemOperations={"get", "patch",
-            "get"={
+            "get_comment"={
                 "method"="GET",
                 "path"="/posts/{id}/comments",
                 "controller"=CommentGetCollectionWithUserController::class
             }
         }
  * )
- * @ApiFilter(SearchFilter::class, properties={"department":"exact", "tags":"exact", "User":"exact"})
+ * @ApiFilter(SearchFilter::class, properties={"department":"exact", "tags":"exact", "User":"exact", "validated": "exact"})
  */
 class Post
 {
