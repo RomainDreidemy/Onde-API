@@ -34,7 +34,6 @@ class UserFixtures extends AppFixtures
                 ->setName($userAdmin['name'])
                 ->setSurname($userAdmin['surname'])
                 ->setRoles(['ROLE_ADMIN'])
-                ->setType($userAdmin['type'])
                 ->setPassword($this->encoder->encodePassword($user, $userAdmin['password']))
             ;
 
@@ -48,7 +47,6 @@ class UserFixtures extends AppFixtures
                 ->setName($this->faker->name)
                 ->setSurname($this->faker->firstName)
                 ->setRoles($this->faker->randomElement([['ROLE_USER'], ['ROLE_PARTENAIRE']]))
-                ->setType($this->faker->randomElement([true, false]))
                 ->setFonction($this->faker->jobTitle)
                 ->setPassword($this->encoder->encodePassword($user, 'userPassword'))
             ;

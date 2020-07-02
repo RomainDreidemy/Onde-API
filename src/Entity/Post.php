@@ -141,7 +141,7 @@ class Post
     private $department;
 
     /**
-     * @ORM\OneToMany(targetEntity=PostGoal::class, mappedBy="Post", cascade={"remove"})
+     * @ORM\OneToMany(targetEntity=PostGoal::class, mappedBy="Post")
      */
     private $postGoals;
 
