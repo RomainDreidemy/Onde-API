@@ -86,7 +86,7 @@ class Comment
     private $date;
 
     /**
-     * @ORM\OneToMany(targetEntity=Like::class, mappedBy="Comment")
+     * @ORM\OneToMany(targetEntity=Like::class, mappedBy="Comment", cascade={"remove"})
      */
     private $likes;
 

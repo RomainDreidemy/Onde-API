@@ -165,7 +165,7 @@ class User implements UserInterface
     private $posts;
 
     /**
-     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="User", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="User", orphanRemoval=true, cascade={"remove"})
      * @Groups({"get", "post", "patch"})
             @ApiProperty(
                 attributes={
@@ -179,7 +179,7 @@ class User implements UserInterface
     private $comments;
 
     /**
-     * @ORM\OneToMany(targetEntity=Like::class, mappedBy="User")
+     * @ORM\OneToMany(targetEntity=Like::class, mappedBy="User", cascade={"remove"})
      * @Groups({"get", "post", "patch"})
         @ApiProperty(
             attributes={
@@ -193,7 +193,7 @@ class User implements UserInterface
     private $likes;
 
     /**
-     * @ORM\OneToMany(targetEntity=Subscription::class, mappedBy="User", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Subscription::class, mappedBy="User", orphanRemoval=true, cascade={"remove"})
      * @Groups({"get", "post", "patch"})
         @ApiProperty(
             attributes={

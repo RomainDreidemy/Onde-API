@@ -115,33 +115,33 @@ class Post
     private $User;
 
     /**
-     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="Post", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="Post", orphanRemoval=true, cascade={"remove"})
      */
     private $comments;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Tags::class, mappedBy="Post")
+     * @ORM\ManyToMany(targetEntity=Tags::class, mappedBy="Post", cascade={"remove"})
      */
     private $tags;
 
     /**
-     * @ORM\OneToMany(targetEntity=Like::class, mappedBy="Post")
+     * @ORM\OneToMany(targetEntity=Like::class, mappedBy="Post", cascade={"remove"})
      */
     private $likes;
 
     /**
-     * @ORM\OneToMany(targetEntity=Subscription::class, mappedBy="Post", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Subscription::class, mappedBy="Post", orphanRemoval=true, cascade={"remove"})
      */
     private $subscriptions;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Department::class, inversedBy="Post")
+     * @ORM\ManyToOne(targetEntity=Department::class, inversedBy="Post", cascade={"remove"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $department;
 
     /**
-     * @ORM\OneToMany(targetEntity=PostGoal::class, mappedBy="Post")
+     * @ORM\OneToMany(targetEntity=PostGoal::class, mappedBy="Post", cascade={"remove"})
      */
     private $postGoals;
 
