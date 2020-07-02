@@ -32,7 +32,6 @@ class UserCrudController extends AbstractCrudController
             TextField::new('password', 'Mot de passe')->onlyWhenCreating()->onlyWhenUpdating(),
             TextField::new('fonction'),
             ArrayField::new('roles'),
-            ChoiceField::new('type', 'Type de compte')->setChoices(['Partenaire' => 1, 'Utilisateur' => 0]),
         ];
     }
 
@@ -56,7 +55,6 @@ class UserCrudController extends AbstractCrudController
             ->add('email')
             ->add('fonction')
             ->add('roles')
-            ->add('type')
             ;
     }
 }
