@@ -12,6 +12,7 @@ use ApiPlatform\Core\Annotation\ApiProperty;
 use App\Controller\Api\Post\PostTopController;
 use App\Controller\Api\Comment\CommentGetCollectionWithUserController;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
+use App\Controller\Api\Tags\TagsGetAllController;
 
 /**
  * @ORM\Entity(repositoryClass=PostRepository::class)
@@ -28,7 +29,12 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
                 "method"="GET",
                 "path"="/posts/{id}/comments",
                 "controller"=CommentGetCollectionWithUserController::class
-            }
+            },
+ *     "get_tags"={
+            "method"="GET",
+            "path"="/posts/{id}/tags",
+            "controller"=TagsGetAllController::class
+        }
         }
  * )
  * @ApiFilter(SearchFilter::class, properties={"department":"exact", "tags":"exact", "User":"exact", "validated": "exact"})

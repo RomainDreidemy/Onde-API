@@ -47,7 +47,7 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
         }
     }
  * )
- * @ApiFilter(SearchFilter::class, properties={"passwordToken"="exact"})
+ * @ApiFilter(SearchFilter::class, properties={"passwordToken"="exact", "roles"="partial"})
  */
 class User implements UserInterface
 {
