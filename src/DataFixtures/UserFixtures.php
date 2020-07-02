@@ -21,7 +21,7 @@ class UserFixtures extends AppFixtures
         // User administrateur
         $usersAdmin = [
             ['email' => 'romain.dreidemy@hetic.net', 'surname' => 'Romain', 'name' => 'Dreidemy', 'type' => false, 'password' => 'onde'],
-            ['email' => 'emma.cassagnettes@hetic.net', 'surname' => 'Emma', 'name' => 'Cassagnettesx', 'type' => false, 'password' => 'onde'],
+            ['email' => 'emma.cassagnettes@hetic.net', 'surname' => 'Emma', 'name' => 'Cassagnettes', 'type' => false, 'password' => 'onde'],
             ['email' => 'victor.balducci@hetic.net', 'surname' => 'Victor', 'name' => 'Balducci', 'type' => false, 'password' => 'onde'],
             ['email' => 'camille.marquand@hetic.net', 'surname' => 'Camille', 'name' => 'Marquand', 'type' => false, 'password' => 'onde'],
             ['email' => 'fiona.roux@hetic.net', 'surname' => 'Fiona', 'name' => 'Roux', 'type' => false, 'password' => 'onde'],
@@ -47,6 +47,7 @@ class UserFixtures extends AppFixtures
                 ->setEmail($this->faker->email)
                 ->setName($this->faker->name)
                 ->setSurname($this->faker->firstName)
+                ->setRoles($this->faker->randomElement([['ROLE_USER'], ['ROLE_PARTENAIRE']]))
                 ->setType($this->faker->randomElement([true, false]))
                 ->setFonction($this->faker->jobTitle)
                 ->setPassword($this->encoder->encodePassword($user, 'userPassword'))

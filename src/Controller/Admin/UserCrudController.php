@@ -3,7 +3,10 @@
 namespace App\Controller\Admin;
 
 use App\Entity\User;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Dto\FilterConfigDto;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ArrayField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
@@ -22,13 +25,38 @@ class UserCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
-            IdField::new('id'),
-            TextField::new('surname'),
-            TextField::new('name'),
+            IdField::new('id')->onlyOnIndex(),
+            TextField::new('surname', 'Prénom'),
+            TextField::new('name', 'Nom'),
             TextField::new('email'),
+            TextField::new('password', 'Mot de passe')->onlyWhenCreating()->onlyWhenUpdating(),
             TextField::new('fonction'),
             ArrayField::new('roles'),
-            ChoiceField::new('type', 'Partenaire')->setChoices(['Partenaire' => 1, 'Utilisateur' => 0]),
+            ChoiceField::new('type', 'Type de compte')->setChoices(['Partenaire' => 1, 'Utilisateur' => 0]),
         ];
+    }
+
+    public function configureCrud(Crud $crud): Crud
+    {
+        return $crud
+            ->setEntityLabelInSingular('Utilisateur')
+            ->setEntityLabelInPlural('Utilisateurs')
+//            ->setEntityPermission('ROLE_ADMIN')
+            ->setPageTitle('index', 'Liste des %entity_label_plural%')
+            ->setDateFormat('long')
+            // ...
+            ;
+    }
+
+    public function configureFilters(Filters $filters): Filters
+    {
+        return $filters
+            ->add('surname')
+            ->add('name')
+            ->add('email')
+            ->add('fonction')
+            ->add('roles')
+            ->add('type')
+            ;
     }
 }
