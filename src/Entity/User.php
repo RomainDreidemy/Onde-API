@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -13,6 +14,7 @@ use App\Controller\Api\User\UserPasswordResetController;
 use App\Controller\Api\User\UserPasswordChangeController;
 use ApiPlatform\Core\Annotation\ApiProperty;
 use Symfony\Component\Serializer\Annotation\Groups;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
@@ -44,9 +46,8 @@ use Symfony\Component\Serializer\Annotation\Groups;
             "denormalization_context"={"groups"={"password"}}
         }
     }
-
-
  * )
+ * @ApiFilter(SearchFilter::class, properties={"passwordToken"="exact"})
  */
 class User implements UserInterface
 {
