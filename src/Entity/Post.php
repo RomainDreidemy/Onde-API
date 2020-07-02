@@ -139,6 +139,11 @@ class Post
      */
     private $postGoals;
 
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $dateMeeting;
+
     public function __construct()
     {
         $this->comments = new ArrayCollection();
@@ -385,6 +390,18 @@ class Post
                 $postGoal->setPost(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getDateMeeting(): ?\DateTimeInterface
+    {
+        return $this->dateMeeting;
+    }
+
+    public function setDateMeeting(?\DateTimeInterface $dateMeeting): self
+    {
+        $this->dateMeeting = $dateMeeting;
 
         return $this;
     }

@@ -26,6 +26,7 @@ class PostFixtures extends AppFixtures implements DependentFixtureInterface
                ->setValidated($this->faker->randomElement([0, 1]))
                ->setUser($this->getRandomReference('user'))
                ->setDepartment($this->faker->randomElement($departments))
+                ->setDateMeeting($this->faker->dateTimeBetween('now', '+30 days'))
            ;
             $nbTags = $this->faker->randomElement([1, 2, 3]);
 
