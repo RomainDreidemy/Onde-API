@@ -145,20 +145,6 @@ class User implements UserInterface
     private $fonction;
 
     /**
-     * @ORM\Column(type="boolean")
-     * @Groups({"get", "post"})
-        @ApiProperty(
-            attributes={
-                "openapi_context"={
-                    "type"="boolean",
-                    "example"=true
-                }
-            }
-        )
-     */
-    private $type;
-
-    /**
      * @ORM\Column(type="text", nullable=true)
      * @Groups("get")
      */
@@ -338,18 +324,6 @@ class User implements UserInterface
     public function setFonction(?string $fonction): self
     {
         $this->fonction = $fonction;
-
-        return $this;
-    }
-
-    public function getType(): ?bool
-    {
-        return $this->type;
-    }
-
-    public function setType(bool $type): self
-    {
-        $this->type = $type;
 
         return $this;
     }
