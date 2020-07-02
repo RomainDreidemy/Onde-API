@@ -21,7 +21,8 @@ class PostCrudController extends AbstractCrudController
         return [
             TextField::new('name', 'Nom'),
             DateTimeField::new('date_created', 'Date de création'),
-            DateField::new('date_end', 'Date de fin')
+            DateField::new('date_end', 'Date de fin'),
+            TextField::new('User.name', 'Créateur'),
         ];
     }
 }
