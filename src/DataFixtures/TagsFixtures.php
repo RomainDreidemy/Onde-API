@@ -24,7 +24,6 @@ class TagsFixtures extends Fixture
         foreach ($tags as $tag){
             $t = (new Tags())
                 ->setName($tag['name'])
-                ->setColor($tag['color'])
             ;
             $manager->persist($t);
         }

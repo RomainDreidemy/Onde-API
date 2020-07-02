@@ -21,7 +21,6 @@ class PostFixtures extends AppFixtures implements DependentFixtureInterface
             $post = (new Post())
                ->setName($this->faker->name)
                ->setDescription($this->faker->paragraph(3))
-               ->setPicture('image.jpg')
                ->setDateCreated($this->faker->dateTimeBetween('-2 month', 'now'))
                ->setDateEnd($this->faker->dateTimeBetween('now', '+30 days'))
                ->setValidated($this->faker->randomElement([0, 1]))

@@ -54,11 +54,6 @@ class Tags
      */
     private $Post;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $color;
-
     public function __construct()
     {
         $this->Post = new ArrayCollection();
@@ -103,18 +98,6 @@ class Tags
         if ($this->Post->contains($post)) {
             $this->Post->removeElement($post);
         }
-
-        return $this;
-    }
-
-    public function getColor(): ?string
-    {
-        return $this->color;
-    }
-
-    public function setColor(?string $color): self
-    {
-        $this->color = $color;
 
         return $this;
     }
