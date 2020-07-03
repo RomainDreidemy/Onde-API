@@ -29,8 +29,8 @@ class TagsCrudController extends AbstractCrudController
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
-            ->setEntityLabelInSingular('Initiative')
-            ->setEntityLabelInPlural('Initiatives')
+            ->setEntityLabelInSingular('Tag')
+            ->setEntityLabelInPlural('Tags')
 //            ->setEntityPermission('ROLE_ADMIN')
             ->setPageTitle('index', 'Liste des %entity_label_plural%')
             ;
