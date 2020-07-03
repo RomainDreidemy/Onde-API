@@ -6,12 +6,19 @@ use ApiPlatform\Core\Annotation\ApiResource;
 use ApiPlatform\Core\Annotation\ApiProperty;
 use App\Repository\LikeRepository;
 use Doctrine\ORM\Mapping as ORM;
+use App\Controller\Api\Like\LikeAddController;
 
 /**
  * @ORM\Entity(repositoryClass=LikeRepository::class)
  * @ORM\Table(name="`like`")
  * @ApiResource(
- *     collectionOperations={"get", "post"},
+ *     collectionOperations={"get",
+          "post"={
+                "method"="POST",
+                "path"="/likes",
+                "controller"=LikeAddController::class
+     *     }
+ *     },
  *     itemOperations={"get", "delete"}
  * )
  */
