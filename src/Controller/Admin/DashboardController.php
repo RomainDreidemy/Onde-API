@@ -52,9 +52,32 @@ class DashboardController extends AbstractDashboardController
 
             yield MenuItem::section('----');
             yield MenuItem::linkToCrud('Utilisateurs', 'icon class', User::class);
-
-
-
         }
+    }
+
+    public function configureUserMenu(UserInterface $user): UserMenu
+    {
+        // Usually it's better to call the parent method because that gives you a
+        // user menu with some menu items already created ("sign out", "exit impersonation", etc.)
+        // if you prefer to create the user menu from scratch, use: return UserMenu::new()->...
+        return parent::configureUserMenu($user)
+            // use the given $user object to get the user name
+            ->setName($user->getSurname())
+
+            // use this method if you don't want to display the name of the user
+//            ->displayUserName(false)
+
+            // you can return an URL with the avatar image
+            // use this method if you don't want to display the user image
+            ->displayUserAvatar(false)
+            // you can also pass an email address to use gravatar's service
+            ->setGravatarEmail($user->getUsername())
+
+            // you can use any type of menu item, except submenus
+            ->addMenuItems([
+                MenuItem::linkToCrud('Mon profile', 'fa fa-id-card', User::class)->setAction('detail')->setEntityId($user->getId()),
+                MenuItem::section(),
+            ])
+        ;
     }
 }
