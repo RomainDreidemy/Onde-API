@@ -52,8 +52,5 @@ class DashboardController extends AbstractDashboardController
             yield MenuItem::linkToCrud('Tags', 'icon class', Tags::class);
             yield MenuItem::linkToCrud('Goutte d\'eau', 'icon class', Like::class);
         }
-
-
-
     }
 }
