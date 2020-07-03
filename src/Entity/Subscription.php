@@ -18,7 +18,7 @@ use App\Controller\Api\Subscription\SubscriptionAddController;
             "controller"=SubscriptionAddController::class,
         }
  *     },
- *     itemOperations={"get", "patch"}
+ *     itemOperations={"get", "delete"}
  * )
  */
 class Subscription
