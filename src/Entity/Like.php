@@ -12,7 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="`like`")
  * @ApiResource(
  *     collectionOperations={"get", "post"},
- *     itemOperations={"get", "patch"}
+ *     itemOperations={"get", "delete"}
  * )
  */
 class Like
