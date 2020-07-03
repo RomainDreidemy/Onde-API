@@ -1,3 +1,5 @@
 easy_admin:
   design:
     brand_color: 'red'
+  formats:
+    date: 'd/m/Y'

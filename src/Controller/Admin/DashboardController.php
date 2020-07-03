@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Comment;
 use App\Entity\Department;
 use App\Entity\Like;
 use App\Entity\Post;
@@ -29,7 +30,8 @@ class DashboardController extends AbstractDashboardController
     {
         return Dashboard::new()
             ->setTitle('Onde - Manager')
-            ->setTranslationDomain('admin');
+            ->setTranslationDomain('admin')
+        ;
     }
 
     public function configureMenuItems(): iterable
@@ -37,6 +39,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linktoDashboard('Dashboard', 'fa fa-home');
         yield MenuItem::linkToCrud('Utilisateurs', 'icon class', User::class);
         yield MenuItem::linkToCrud('Initiatives', 'icon class', Post::class);
+        yield MenuItem::linkToCrud('Commentaires', 'icon class', Comment::class);
 
         yield MenuItem::linkToCrud('Departements', 'icon class', Department::class);
         yield MenuItem::linkToCrud('Tags', 'icon class', Tags::class);
