@@ -135,13 +135,13 @@ class Post
     private $subscriptions;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Department::class, inversedBy="Post", cascade={"remove"})
+     * @ORM\ManyToOne(targetEntity=Department::class, inversedBy="Post")
      * @ORM\JoinColumn(nullable=false)
      */
     private $department;
 
     /**
-     * @ORM\OneToMany(targetEntity=PostGoal::class, mappedBy="Post")
+     * @ORM\OneToMany(targetEntity=PostGoal::class, mappedBy="Post", cascade={"remove"})
      */
     private $postGoals;
 

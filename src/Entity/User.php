@@ -151,7 +151,7 @@ class User implements UserInterface
     private $passwordToken;
 
     /**
-     * @ORM\OneToMany(targetEntity=Post::class, mappedBy="User", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Post::class, mappedBy="User", orphanRemoval=true, cascade={"remove"})
      * @Groups({"get", "post", "patch"})
         @ApiProperty(
             attributes={
