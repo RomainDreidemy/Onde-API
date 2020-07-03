@@ -28,15 +28,16 @@ class PostCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
+            IdField::new('id')->hideOnForm(),
             TextField::new('name', 'Nom'),
             TextareaField::new('description', 'Description'),
             DateField::new('date_created', 'Date de création'),
             DateField::new('date_end', 'Date de fin'),
             DateTimeField::new('dateMeeting', 'Rendez-vous'),
-            TextField::new('Department.name', 'Département')->onlyOnIndex(),
-            AssociationField::new('likes', 'Goutte d\'eau')->onlyOnIndex(),
-            AssociationField::new('subscriptions', 'Participant')->onlyOnIndex(),
-            TextField::new('User.name', 'Créateur')->onlyOnIndex(),
+            TextField::new('Department.name', 'Département')->hideOnForm(),
+            AssociationField::new('likes', 'Goutte d\'eau')->hideOnForm(),
+            AssociationField::new('subscriptions', 'Participant')->hideOnForm(),
+            TextField::new('User.name', 'Créateur')->hideOnForm(),
             BooleanField::new('validated', 'Validé'),
         ];
     }
