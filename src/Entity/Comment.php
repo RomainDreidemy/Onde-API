@@ -19,7 +19,7 @@ use App\Controller\Api\Comment\CommentGetCollectionWithUserController;
             "method"="GET",
             "path"="/comments/{id}",
             "controller"=CommentGetWithUserController::class
-        }, "patch"}
+        }, "patch", "delete"}
  * )
  */
 class Comment
