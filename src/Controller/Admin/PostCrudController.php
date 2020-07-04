@@ -32,12 +32,12 @@ class PostCrudController extends AbstractCrudController
             TextField::new('name', 'Nom'),
             TextareaField::new('description', 'Description'),
             DateField::new('date_created', 'Date de création'),
-            DateField::new('date_end', 'Date de fin'),
+//            DateField::new('date_end', 'Date de fin'),
             DateTimeField::new('dateMeeting', 'Rendez-vous'),
             TextField::new('Department.name', 'Département')->hideOnForm(),
             AssociationField::new('likes', 'Goutte d\'eau')->hideOnForm(),
             AssociationField::new('subscriptions', 'Participant')->hideOnForm(),
-            TextField::new('User.name', 'Créateur')->hideOnForm(),
+//            TextField::new('User.name', 'Créateur')->hideOnForm(),
             BooleanField::new('validated', 'Validé'),
         ];
     }
@@ -60,6 +60,6 @@ class PostCrudController extends AbstractCrudController
             ->add('date_end')
             ->add('dateMeeting')
             ->add('validated')
-            ;
+        ;
     }
 }
