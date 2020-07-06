@@ -45,7 +45,7 @@ class DashboardController extends AbstractDashboardController
 
 
 
-        if($this->isGranted('ROLE_ADMIN') || $this->isGranted('ROLE_PARTENAIRE')){
+        if($this->isGranted('ROLE_ADMIN') || $this->isGranted('ROLE_MODO')){
             yield MenuItem::linktoDashboard('Dashboard', 'fa fa-home');
 
             yield MenuItem::section('Api');
@@ -73,7 +73,7 @@ class DashboardController extends AbstractDashboardController
         // if you prefer to create the user menu from scratch, use: return UserMenu::new()->...
         return parent::configureUserMenu($user)
             // use the given $user object to get the user name
-            ->setName($user->getSurname())
+            ->setName($user->getSurname() . ' ' . $user->getName())
 
             // use this method if you don't want to display the name of the user
 //            ->displayUserName(false)
