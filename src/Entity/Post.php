@@ -34,7 +34,7 @@ use App\Controller\Api\Tags\TagsGetAllController;
             "method"="GET",
             "path"="/posts/{id}/tags",
             "controller"=TagsGetAllController::class
-        }
+            }, "delete"
         }
  * )
  * @ApiFilter(SearchFilter::class, properties={"department":"exact", "tags":"exact", "User":"exact", "validated": "exact"})
