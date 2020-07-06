@@ -17,6 +17,7 @@ class PostFilterController extends AbstractController
      */
     public function index(EntityManagerInterface $entityManager, Request $request)
     {
+        // Resultat
 
         $param = $request->query;
 
