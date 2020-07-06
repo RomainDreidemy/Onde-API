@@ -25,7 +25,7 @@ use App\Controller\Api\Post\PostGetOneController;
                 "controller"=PostTopController::class,
             }
  *     },
- *     itemOperations={"get", "patch",
+ *     itemOperations={"patch",
             "get_comment"={
                 "method"="GET",
                 "path"="/posts/{id}/comments",
