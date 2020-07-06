@@ -13,6 +13,7 @@ use App\Controller\Api\Post\PostTopController;
 use App\Controller\Api\Comment\CommentGetCollectionWithUserController;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use App\Controller\Api\Tags\TagsGetAllController;
+use App\Controller\Api\Post\PostGetOneController;
 
 /**
  * @ORM\Entity(repositoryClass=PostRepository::class)
@@ -30,12 +31,17 @@ use App\Controller\Api\Tags\TagsGetAllController;
                 "path"="/posts/{id}/comments",
                 "controller"=CommentGetCollectionWithUserController::class
             },
- *     "get_tags"={
-            "method"="GET",
-            "path"="/posts/{id}/tags",
-            "controller"=TagsGetAllController::class
-            }, "delete"
-        }
+ *          "get_tags"={
+                "method"="GET",
+                "path"="/posts/{id}/tags",
+                "controller"=TagsGetAllController::class
+            }, "delete",
+ *          "get"={
+                "method"="GET",
+                "controller"=PostGetOneController::class
+             }
+        },
+ *
  * )
  * @ApiFilter(SearchFilter::class, properties={"department":"exact", "tags":"exact", "User":"exact", "validated": "exact"})
  */
