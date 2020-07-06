@@ -41,7 +41,8 @@ class PostGetOneController extends AbstractController
                 'User' => $data->getUser()->getId(),
                 'dateCreated' => $data->getDateCreated(),
                 'dateEnd' => $data->getDateEnd(),
-                'dateMeeting' => $data->getDateMeeting()
+                'dateMeeting' => $data->getDateMeeting(),
+                'likes' => $data->getLikes()
             ],
             'Goal' => $data->getPostGoals(),
             'Tags' => $tags
