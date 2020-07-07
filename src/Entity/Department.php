@@ -72,16 +72,6 @@ class Department
      */
     private $Post;
 
-    /**
-     * @ORM\Column(type="text")
-     */
-    private $svg;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $placement;
-
     public function __construct()
     {
         $this->Post = new ArrayCollection();
@@ -143,30 +133,6 @@ class Department
                 $post->setDepartment(null);
             }
         }
-
-        return $this;
-    }
-
-    public function getSvg(): ?string
-    {
-        return $this->svg;
-    }
-
-    public function setSvg(string $svg): self
-    {
-        $this->svg = $svg;
-
-        return $this;
-    }
-
-    public function getPlacement(): ?int
-    {
-        return $this->placement;
-    }
-
-    public function setPlacement(int $placement): self
-    {
-        $this->placement = $placement;
 
         return $this;
     }
