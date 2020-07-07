@@ -7,6 +7,8 @@ use ApiPlatform\Core\Annotation\ApiProperty;
 use App\Repository\LikeRepository;
 use Doctrine\ORM\Mapping as ORM;
 use App\Controller\Api\Like\LikeAddController;
+use ApiPlatform\Core\Annotation\ApiFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 
 /**
  * @ORM\Entity(repositoryClass=LikeRepository::class)
@@ -21,6 +23,8 @@ use App\Controller\Api\Like\LikeAddController;
  *     },
  *     itemOperations={"get", "delete"}
  * )
+ *
+ *      @ApiFilter(SearchFilter::class, properties={"User":"exact", "Comment":"exact", "Post":"exact"})
  */
 class Like
 {
