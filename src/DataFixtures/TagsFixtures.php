@@ -10,20 +10,11 @@ class TagsFixtures extends Fixture
 {
     public function load(ObjectManager $manager)
     {
-        $tags = [
-            ['name' => 'Sauvetage', 'color' => '#ABABAB'],
-            ['name' => 'Nettoyage', 'color' => '#ABABAB'],
-            ['name' => 'Protection animale', 'color' => '#ABABAB'],
-            ['name' => 'Manifestations', 'color' => '#ABABAB'],
-            ['name' => 'Collecte de fonds', 'color' => '#ABABAB'],
-            ['name' => 'Expositions', 'color' => '#ABABAB'],
-            ['name' => 'Biodiversité', 'color' => '#ABABAB'],
-            ['name' => 'Végétalisation/Reforestation', 'color' => '#ABABAB'],
-        ];
+        $tags = ['Sauvetage', 'Nettoyage', 'Animaux', 'Manifestation', 'Collecte de fonds', 'Exposition', 'Biodiversité', 'Revegétalisation', 'Reforestation', 'Protection animale'];
 
         foreach ($tags as $tag){
             $t = (new Tags())
-                ->setName($tag['name'])
+                ->setName($tag)
             ;
             $manager->persist($t);
         }

@@ -13,11 +13,11 @@ class DepartmentFixtures extends Fixture
         $departments = [
             ['code' => '66', 'name' => 'Pyrénées oriental'],
             ['code' => '11', 'name' => 'Aude'],
-            ['code' => '34', 'name' => 'Herault'],
+            ['code' => '34', 'name' => 'Hérault'],
             ['code' => '30', 'name' => 'Gard'],
             ['code' => '13', 'name' => 'Bouches du Rhone'],
             ['code' => '83', 'name' => 'Var'],
-            ['code' => '06', 'name' => 'Alpes Maritimes'],
+            ['code' => '06', 'name' => 'Alpes maritimes'],
             ['code' => '2B', 'name' => 'Haute Corse' ],
             ['code' => '2A', 'name' => 'Corse du sud']
         ];

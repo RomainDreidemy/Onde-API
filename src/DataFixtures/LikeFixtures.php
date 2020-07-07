@@ -4,6 +4,7 @@ namespace App\DataFixtures;
 
 use App\Entity\Like;
 use App\Entity\Post;
+use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
@@ -12,23 +13,21 @@ class LikeFixtures extends AppFixtures implements DependentFixtureInterface
 {
     protected function loadData(ObjectManager $manager)
     {
-        $this->createMany(30, 'likePost', function (){
-           $like = (new Like())
-               ->setUser($this->getRandomReference('user'))
-               ->setPost($this->getRandomReference('post'))
-           ;
+        for($i = 0; $i < 200; $i++){
+            $user = $this->faker->randomElement($manager->getRepository(User::class)->findAll());
+            $post = $this->faker->randomElement($manager->getRepository(Post::class)->findAll());
 
-           return $like;
-        });
+            $alreadyExist = $manager->getRepository(Like::class)->findOneBy(['User' => $user, 'Post' => $post]);
 
-        $this->createMany(150, 'likeComment', function (){
-            $like = (new Like())
-                ->setUser($this->getRandomReference('user'))
-                ->setComment($this->getRandomReference('comment'))
-            ;
+            if(is_null($alreadyExist)){
+                $like = (new Like())
+                    ->setUser($user)
+                    ->setPost($post)
+                ;
 
-            return $like;
-        });
+                $manager->persist($like);
+            }
+        }
 
         $manager->flush();
     }

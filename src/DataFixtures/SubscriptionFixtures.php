@@ -11,14 +11,14 @@ class SubscriptionFixtures extends AppFixtures implements DependentFixtureInterf
 {
     protected function loadData(ObjectManager $manager)
     {
-        $this->createMany(30, 'subscription', function (){
-            $subscription = (new Subscription())
-                ->setUser($this->getRandomReference('user'))
-                ->setPost($this->getRandomReference('post'))
-            ;
-
-            return $subscription;
-        });
+//        $this->createMany(30, 'subscription', function (){
+//            $subscription = (new Subscription())
+//                ->setUser($this->getRandomReference('user'))
+//                ->setPost($this->getRandomReference('post'))
+//            ;
+//
+//            return $subscription;
+//        });
     }
 
     public function getDependencies()
