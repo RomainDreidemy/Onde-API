@@ -25,6 +25,8 @@ class UserFixtures extends AppFixtures
             ['email' => 'victor.balducci@hetic.net', 'surname' => 'Victor', 'name' => 'Balducci', 'type' => false, 'password' => 'onde'],
             ['email' => 'camille.marquand@hetic.net', 'surname' => 'Camille', 'name' => 'Marquand', 'type' => false, 'password' => 'onde'],
             ['email' => 'fiona.roux@hetic.net', 'surname' => 'Fiona', 'name' => 'Roux', 'type' => false, 'password' => 'onde'],
+            ['email' => 'aymericmayeux@gmail.com', 'surname' => 'Aymeric', 'name' => 'Mayeux', 'type' => false, 'password' => 'intervenant'],
+            ['email' => 'bastien.calou@gmail.com', 'surname' => 'Bastien', 'name' => 'Calou', 'type' => false, 'password' => 'intervenant'],
         ];
 
         foreach ($usersAdmin as $userAdmin){
@@ -40,13 +42,13 @@ class UserFixtures extends AppFixtures
             $manager->persist($user);
         }
 
-        $this->createMany(20, 'user', function (){
+        $this->createMany(40, 'user', function (){
             $user = new User();
             $user
                 ->setEmail($this->faker->email)
                 ->setName($this->faker->name)
                 ->setSurname($this->faker->firstName)
-                ->setRoles($this->faker->randomElement([['ROLE_USER'], ['ROLE_PARTENAIRE']]))
+                ->setRoles($this->faker->randomElement([['ROLE_USER'], ['ROLE_PARTENAIRE'], ['ROLE_MODO']]))
                 ->setFonction($this->faker->jobTitle)
                 ->setPassword($this->encoder->encodePassword($user, 'userPassword'))
             ;
