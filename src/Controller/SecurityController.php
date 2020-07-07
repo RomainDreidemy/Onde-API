@@ -54,7 +54,6 @@ class SecurityController extends AbstractController
             'username_parameter' => 'email',
             'password_parameter' => 'password',
         ]);
-//        return $this->render('security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
     }
 
     /**

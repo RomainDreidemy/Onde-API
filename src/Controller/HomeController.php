@@ -15,7 +15,7 @@ class HomeController extends AbstractController
     /**
      * @Route("/", name="home")
      */
-    public function index(EntityManagerInterface $entityManager, Request $request)
+    public function index()
     {
         return $this->redirectToRoute('api_entrypoint');
     }
