@@ -7,6 +7,7 @@ use App\Repository\PostGoalRepository;
 use Doctrine\ORM\Mapping as ORM;
 use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
+use ApiPlatform\Core\Annotation\ApiProperty;
 
 /**
  * @ORM\Entity(repositoryClass=PostGoalRepository::class)
@@ -23,31 +24,79 @@ class PostGoal
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+        @ApiProperty(
+            attributes={
+                "openapi_context"={
+                    "type"="integer",
+                    "example"=1
+                }
+            }
+        )
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+        @ApiProperty(
+            attributes={
+                "openapi_context"={
+                    "type"="relation",
+                    "example"="Nettoyer 2km de plage"
+                }
+            }
+        )
      */
     private $name;
 
     /**
      * @ORM\Column(type="integer")
+        @ApiProperty(
+            attributes={
+                "openapi_context"={
+                    "type"="integer",
+                    "example"=22
+                }
+            }
+        )
      */
     private $number;
 
     /**
      * @ORM\Column(type="integer")
+        @ApiProperty(
+            attributes={
+                "openapi_context"={
+                    "type"="integer",
+                    "example"=1
+                }
+            }
+        )
      */
     private $placement;
 
     /**
      * @ORM\ManyToOne(targetEntity=Post::class, inversedBy="postGoals")
+        @ApiProperty(
+            attributes={
+                "openapi_context"={
+                    "type"="relation",
+                    "example"="/api/posts/1"
+                }
+            }
+        )
      */
     private $Post;
 
     /**
      * @ORM\Column(type="boolean")
+        @ApiProperty(
+            attributes={
+                "openapi_context"={
+                    "type"="boolean",
+                    "example"=false
+                }
+            }
+        )
      */
     private $done;
 

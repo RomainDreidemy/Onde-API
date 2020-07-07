@@ -28,6 +28,14 @@ class Comment
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+        @ApiProperty(
+            attributes={
+                "openapi_context"={
+                    "type"="integer",
+                    "example"=1
+                }
+            }
+        )
      */
     private $id;
 
@@ -51,7 +59,7 @@ class Comment
             attributes={
                 "openapi_context"={
                     "type"="relation",
-                    "example"="/api/user/1"
+                    "example"="/api/users/1"
                 }
             }
         )
@@ -65,7 +73,7 @@ class Comment
             attributes={
                 "openapi_context"={
                     "type"="relation",
-                    "example"="/api/post/1"
+                    "example"="/api/posts/1"
                 }
             }
         )
@@ -87,6 +95,14 @@ class Comment
 
     /**
      * @ORM\OneToMany(targetEntity=Like::class, mappedBy="Comment", cascade={"remove"})
+        @ApiProperty(
+            attributes={
+                "openapi_context"={
+                    "type"="relation",
+                    "example"="/api/likes/1"
+                }
+            }
+        )
      */
     private $likes;
 

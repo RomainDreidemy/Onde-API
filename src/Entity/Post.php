@@ -26,6 +26,10 @@ use App\Controller\Api\Post\PostGetOneController;
             }
  *     },
  *     itemOperations={"patch",
+            "get"={
+                "method"="GET",
+                "controller"=PostGetOneController::class
+            },
             "get_comment"={
                 "method"="GET",
                 "path"="/posts/{id}/comments",
@@ -35,11 +39,7 @@ use App\Controller\Api\Post\PostGetOneController;
                 "method"="GET",
                 "path"="/posts/{id}/tags",
                 "controller"=TagsGetAllController::class
-            }, "delete",
- *          "get"={
-                "method"="GET",
-                "controller"=PostGetOneController::class
-             }
+            }, "delete"
         },
  *
  * )
@@ -117,42 +117,103 @@ class Post
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="posts")
      * @ORM\JoinColumn(nullable=false)
+        @ApiProperty(
+            attributes={
+                "openapi_context"={
+                    "type"="relation",
+                    "example"="/api/users/1"
+                }
+            }
+        )
      */
     private $User;
 
     /**
      * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="Post", orphanRemoval=true, cascade={"remove"})
+        @ApiProperty(
+            attributes={
+                "openapi_context"={
+                    "type"="relation",
+                    "example"="/api/comments/1"
+                }
+            }
+        )
      */
     private $comments;
 
     /**
      * @ORM\ManyToMany(targetEntity=Tags::class, mappedBy="Post", cascade={"remove"})
+        @ApiProperty(
+            attributes={
+                "openapi_context"={
+                    "type"="relation",
+                    "example"="/api/tags/1"
+                }
+            }
+        )
      */
     private $tags;
 
     /**
      * @ORM\OneToMany(targetEntity=Like::class, mappedBy="Post", cascade={"remove"})
+        @ApiProperty(
+            attributes={
+                "openapi_context"={
+                    "type"="relation",
+                    "example"="/api/likes/1"
+                }
+            }
+        )
      */
     private $likes;
 
     /**
      * @ORM\OneToMany(targetEntity=Subscription::class, mappedBy="Post", orphanRemoval=true, cascade={"remove"})
+        @ApiProperty(
+            attributes={
+                "openapi_context"={
+                    "type"="relation",
+                    "example"="/api/subscriptions/1"
+                }
+            }
+        )
      */
     private $subscriptions;
 
     /**
      * @ORM\ManyToOne(targetEntity=Department::class, inversedBy="Post")
      * @ORM\JoinColumn(nullable=false)
+        @ApiProperty(
+            attributes={
+                "openapi_context"={
+                    "type"="relation",
+                    "example"="/api/departments/1"
+                }
+        }
+    )
      */
     private $department;
 
     /**
      * @ORM\OneToMany(targetEntity=PostGoal::class, mappedBy="Post", cascade={"remove"})
+        @ApiProperty(
+            attributes={
+                "openapi_context"={
+                    "type"="relation",
+                    "example"="/api/post_goals/1"
+                }
+            }
+        )
      */
     private $postGoals;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
+        @ApiProperty(
+            attributes={
+                "swagger_context"={"type"="datetime", "format"="date"}
+            }
+        )
      */
     private $dateMeeting;
 
