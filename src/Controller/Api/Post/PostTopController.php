@@ -11,16 +11,22 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 class PostTopController extends AbstractController
 {
     private $manager;
-    private $encoder;
 
-    public function __construct(EntityManagerInterface $entityManager, UserPasswordEncoderInterface $encoder)
+    /**
+     * PostTopController constructor.
+     * @param EntityManagerInterface $entityManager
+     */
+    public function __construct(EntityManagerInterface $entityManager)
     {
         $this->manager = $entityManager;
-        $this->encoder = $encoder;
     }
 
+    /**
+     * @return array
+     */
     public function __invoke() : array
     {
+        // Retourne les Post avec le plus de like
         return $this->manager->getRepository(Post::class)->findByTop(10);;
     }
 }

@@ -17,31 +17,41 @@ class LikeAddController extends AbstractController
 {
     private $manager;
 
-    public function __construct(EntityManagerInterface $entityManager, MailerInterface $mailer)
+    /**
+     * LikeAddController constructor.
+     * @param EntityManagerInterface $entityManager
+     * @param MailerInterface $mailer
+     */
+    public function __construct(EntityManagerInterface $entityManager)
     {
         $this->manager = $entityManager;
     }
 
     public function __invoke(Like $data)
     {
+        // Récupération des objectifs
         $goals = $data->getPost()->getPostGoals();
 
+        // Si un commentaire et un post est ciblé
         if(!is_null($data->getComment()) && !is_null($data->getPost())){
             return $this->json([
                 'error' => 'Il faut faire un choix entre Post et Comment pour attribuer le like'
             ], 500);
         }
 
+        // Si aucun des deux ne sont ciblé
         if(is_null($data->getComment()) && is_null($data->getPost())){
             return $this->json([
                 'error' => 'Il faut faire au que soit Post soit Comment soit défini'
             ], 500);
         }
 
+        // Si la combinaison Post User existe déjà
         if(!is_null($data->getPost())){
             $alreadyExist = $this->manager->getRepository(Like::class)->findOneBy(['User' => $data->getUser(), 'Post' => $data->getPost()]);
         }
 
+        // Si La combinaison Comment User existe déjà
         if(!is_null($data->getComment())){
             $alreadyExist = $this->manager->getRepository(Like::class)->findOneBy(['User' => $data->getUser(), 'Comment' => $data->getComment()]);
         }
@@ -53,7 +63,8 @@ class LikeAddController extends AbstractController
             ], 500);
         }
 
-
+        $this->manager->persist($data);
+        $this->manager->flush();
 
         return $data;
     }

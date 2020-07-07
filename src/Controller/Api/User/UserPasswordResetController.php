@@ -15,12 +15,22 @@ class UserPasswordResetController extends AbstractController
     private $manager;
     private $mailer;
 
+    /**
+     * UserPasswordResetController constructor.
+     * @param EntityManagerInterface $entityManager
+     * @param MailerInterface $mailer
+     */
     public function __construct(EntityManagerInterface $entityManager, MailerInterface $mailer)
     {
         $this->manager = $entityManager;
         $this->mailer = $mailer;
     }
 
+    /**
+     * @param User $data
+     * @return \Symfony\Component\HttpFoundation\JsonResponse
+     * @throws \Symfony\Component\Mailer\Exception\TransportExceptionInterface
+     */
     public function __invoke(User $data)
     {
         //Add a token for reset password
@@ -42,6 +52,7 @@ class UserPasswordResetController extends AbstractController
                 'user' => $data
             ]);
 
+        //Envoi de l'Email
         $this->mailer->send($email);
 
         return $this->json(['message' => 'mail envoyé']);

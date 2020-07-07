@@ -12,13 +12,22 @@ class TagsGetAllController extends AbstractController
 {
     private $manager;
 
+    /**
+     * TagsGetAllController constructor.
+     * @param EntityManagerInterface $entityManager
+     */
     public function __construct(EntityManagerInterface $entityManager)
     {
         $this->manager = $entityManager;
     }
 
+    /**
+     * @param Post $data
+     * @return \Symfony\Component\HttpFoundation\JsonResponse
+     */
     public function __invoke(Post $data)
     {
+        //Fusionne les tags avec le département + Si l'utilisateur est un partenaire à la demande du front
         $tags = [];
 
         foreach ($data->getTags() as $tag){

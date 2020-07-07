@@ -14,11 +14,13 @@ class PostFilterController extends AbstractController
 {
     /**
      * @Route("/api/posts/filter", name="postFilter")
+     * @param EntityManagerInterface $entityManager
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\JsonResponse
      */
     public function index(EntityManagerInterface $entityManager, Request $request)
     {
-        // Resultat
-
+        // Récupération des paramètres
         $param = $request->query;
 
         if(is_null(is_null($param->get('type')))){
@@ -63,11 +65,9 @@ class PostFilterController extends AbstractController
         if(!is_null($param->get('limit'))){
             $limit = $param->get('limit');
         }
-//            dd($filtre);
 
+        // Requête SQL utilisant les paramètre de l'URL
         $posts = $entityManager->getRepository(Post::class)->findByCritere($type, $filtre, ($limit ?? null));
-
-        dd($posts);
 
         return $this->json($posts, 200);
     }

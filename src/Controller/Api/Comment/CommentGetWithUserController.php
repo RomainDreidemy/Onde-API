@@ -14,13 +14,23 @@ class CommentGetWithUserController extends AbstractController
 {
     private $manager;
 
+    /**
+     * CommentGetWithUserController constructor.
+     * @param EntityManagerInterface $entityManager
+     * @param UserPasswordEncoderInterface $encoder
+     */
     public function __construct(EntityManagerInterface $entityManager, UserPasswordEncoderInterface $encoder)
     {
         $this->manager = $entityManager;
     }
 
+    /**
+     * @param Comment $data
+     * @return \Symfony\Component\HttpFoundation\JsonResponse
+     */
     public function __invoke(Comment $data)
     {
+        // Ajout des informations de l'utilisateur pour return dans le commentairec
         $commentsNew = [
             'id' => $data->getId(),
             'text' => $data->getText(),

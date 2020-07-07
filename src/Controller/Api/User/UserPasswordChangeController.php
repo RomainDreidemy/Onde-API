@@ -16,14 +16,24 @@ class UserPasswordChangeController extends AbstractController
     private $manager;
     private $encoder;
 
+    /**
+     * UserPasswordChangeController constructor.
+     * @param EntityManagerInterface $entityManager
+     * @param UserPasswordEncoderInterface $encoder
+     */
     public function __construct(EntityManagerInterface $entityManager, UserPasswordEncoderInterface $encoder)
     {
         $this->manager = $entityManager;
         $this->encoder = $encoder;
     }
 
+    /**
+     * @param User $data
+     * @return User
+     */
     public function __invoke(User $data)
     {
+        // Encodage du mot de passe dans le cadre d'un reset
         $data
             ->setPassword($this->encoder->encodePassword($data, $data->getPassword()))
             ->setPasswordToken(null)

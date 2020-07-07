@@ -11,15 +11,23 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 class PostGetOneController extends AbstractController
 {
     private $manager;
-    private $encoder;
 
+    /**
+     * PostGetOneController constructor.
+     * @param EntityManagerInterface $entityManager
+     */
     public function __construct(EntityManagerInterface $entityManager)
     {
         $this->manager = $entityManager;
     }
 
+    /**
+     * @param Post $data
+     * @return \Symfony\Component\HttpFoundation\JsonResponse
+     */
     public function __invoke(Post $data)
     {
+        // Récupère le nom du département & si l'utilisateur est un partenaire pour les ajouter dans la liste des tags pour le front
         $tags = [];
 
         foreach ($data->getTags() as $tag){

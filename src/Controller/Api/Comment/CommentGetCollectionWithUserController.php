@@ -14,17 +14,28 @@ class CommentGetCollectionWithUserController extends AbstractController
 {
     private $manager;
 
+    /**
+     * CommentGetCollectionWithUserController constructor.
+     * @param EntityManagerInterface $entityManager
+     * @param UserPasswordEncoderInterface $encoder
+     */
     public function __construct(EntityManagerInterface $entityManager, UserPasswordEncoderInterface $encoder)
     {
         $this->manager = $entityManager;
     }
 
+    /**
+     * @param Post $data
+     * @return \Symfony\Component\HttpFoundation\JsonResponse
+     */
     public function __invoke(Post $data)
     {
+        // Récupération des commentaires du Post
         $data = $data->getComments();
 
         $commentsNew = [];
 
+        // Ajout des informations de l'utilisateur pour return dans le commentairec
         foreach ($data as $comment){
             $commentsNew[] = [
                 'id' => $comment->getId(),
