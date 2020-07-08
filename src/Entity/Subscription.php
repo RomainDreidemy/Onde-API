@@ -7,6 +7,8 @@ use ApiPlatform\Core\Annotation\ApiProperty;
 use App\Repository\SubscriptionRepository;
 use Doctrine\ORM\Mapping as ORM;
 use App\Controller\Api\Subscription\SubscriptionAddController;
+use ApiPlatform\Core\Annotation\ApiFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 
 /**
  * @ORM\Entity(repositoryClass=SubscriptionRepository::class)
@@ -41,6 +43,7 @@ class Subscription
                 }
             }
         )
+     *      @ApiFilter(SearchFilter::class, properties={"User":"exact", "Post":"exact"})
      */
     private $User;
 
