@@ -63,6 +63,34 @@ Pour des raisons techniques, j’ai du crx éer des route personnalisé dans l�
 • Pour la création d’un utlilsateur, pour encoder le mot de passe.
 • Pour certaines entités pour récupérer plus d’in et éviter au front de faire plusieurs call api.
 
+*Ajouter une route custom à une entitée*
+```PHP7.4 - Annotation
+"get_tags"={
+    "method"="GET",
+    "path"="/posts/{id}/tags",
+    "controller"=TagsGetAllController::class
+}
+```
+
+*Ajouter des filtres*
+```PHP7.4 - Annotation
+@ApiFilter(SearchFilter::class, properties={"department":"exact", "tags":"exact", "User":"exact", "validated": "exact"})
+```
+
+*Générer de la documentation pour une variable*
+```PHP7.4 - Annotation
+@ApiProperty(
+    attributes={
+        "openapi_context"={
+            "type"="string",
+            "example"="Description de l'initiative"
+        }
+    }
+)
+```
+
+
+
 > Vous pouvez voir les différentes routes créer dans ./src/Controller/Api
 
 #### EasyAdmin :
@@ -82,11 +110,25 @@ Nous avons défini 4 rôles différents pour les utilisateurs. Le rôle User, Ad
 
 #### Mailer : 
 Lorsqu’un utilisateur à perdu son mot de passe ou si des objectifs sont atteind dans une initiative, un mail est envoyer aux utilisateurs concerné.
+```PHP
+$email = new TemplatedEmail();
+
+$email
+    ->from('contact.onde.projet@gmail.com')
+    ->to(new Address($data->getEmail()))
+    ->subject('Onde - Réinitialisation de votre mot de passe')
+    ->htmlTemplate('mailer/reset-password.html.twig')
+    ->context([
+        'user' => $data
+    ]);
+
+$this->mailer->send($email);
+```
 
 ### Dossier pdf :
-Ce dossier comporte des informations supplémentaire, ainsi que les modélisations de la base données
+Ce dossier comporte des informations supplémenta    ire, ainsi que les modélisations de la base données
 
-*Lien du dosser* 
+[Dossier à télécharger](https://drive.google.com/file/d/1vdaz9F92z803xH8CwojrI7f_ArH_L_ec/view?usp=sharing)
 
 
 
