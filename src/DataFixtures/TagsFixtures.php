@@ -10,7 +10,7 @@ class TagsFixtures extends Fixture
 {
     public function load(ObjectManager $manager)
     {
-        $tags = ['Sauvetage', 'Nettoyage', 'Animaux', 'Manifestation', 'Collecte de fonds', 'Exposition', 'Biodiversité', 'Revegétalisation', 'Reforestation', 'Protection animale'];
+        $tags = ['Sauvetage', 'Nettoyage', 'Animaux', 'Manifestation', 'Collecte de fonds', 'Exposition', 'Biodiversité', 'Revegétalisation', 'Reforestation', 'Protection animale', 'Végétalisation', 'Plage'];
 
         foreach ($tags as $tag){
             $t = (new Tags())
