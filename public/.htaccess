@@ -70,4 +70,4 @@ DirectoryIndex index.php
 #</IfModule>
 
 
-Header set Access-Control-Allow-Origin "*"
+#Header set Access-Control-Allow-Origin "*"
