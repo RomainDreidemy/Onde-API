@@ -68,7 +68,7 @@ class UserFixtures extends AppFixtures
                 ->setEmail($this->faker->email)
                 ->setName($this->faker->name)
                 ->setSurname($this->faker->firstName)
-                ->setRoles($this->faker->randomElement([['ROLE_USER'], ['ROLE_PARTENAIRE'], ['ROLE_MODO']]))
+                ->setRoles($this->faker->randomElement([['ROLE_USER'], ['ROLE_MODO']]))
                 ->setFonction($this->faker->jobTitle)
                 ->setPassword($this->encoder->encodePassword($user, 'userPassword'))
             ;
