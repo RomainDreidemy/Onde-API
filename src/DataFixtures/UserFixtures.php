@@ -32,9 +32,9 @@ class UserFixtures extends AppFixtures
         $userPartenaire = [
             ['email' => 'contact@wwf.fr', 'name' => 'WWF', 'password' => 'partenaire'],
             ['email' => 'contact@greenpeace.fr', 'name' => 'GreenPeace', 'password' => 'partenaire'],
-            ['email' => 'contact@upm.fr', 'name' => 'WWF', 'UpM' => 'partenaire'],
+            ['email' => 'contact@upm.fr', 'name' => 'WWF', 'UpM' => 'partenaire', 'password' => 'partenaire'],
             ['email' => 'contact@eaurmc.fr', 'name' => 'Eau RMC', 'password' => 'partenaire'],
-            ['email' => 'contact@sosgrandbleau.fr', 'name' => 'SOS Grand Bleu', 'password' => 'partenaire'],
+            ['email' => 'contact@sosgrandbleau.fr', 'name' => 'SOS Grand Bleu', 'password' => 'partenaire']
         ];
 
         foreach ($usersAdmin as $userAdmin){
@@ -45,6 +45,18 @@ class UserFixtures extends AppFixtures
                 ->setSurname($userAdmin['surname'])
                 ->setRoles(['ROLE_ADMIN'])
                 ->setPassword($this->encoder->encodePassword($user, $userAdmin['password']))
+            ;
+
+            $manager->persist($user);
+        }
+
+        foreach ($userPartenaire as $userP){
+            $user = new User();
+            $user
+                ->setEmail($userP['email'])
+                ->setName($userP['name'])
+                ->setRoles(['ROLE_PARTENAIRE'])
+                ->setPassword($this->encoder->encodePassword($user, $userP['password']))
             ;
 
             $manager->persist($user);

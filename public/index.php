@@ -7,6 +7,15 @@ use Symfony\Component\HttpFoundation\Request;
 
 require dirname(__DIR__).'/vendor/autoload.php';
 
+//$http_Origin = $_SERVER['HTTP_Origin'];
+
+//dd($_SERVER);
+//
+//if ($http_Origin == "https://onde.netlify.app")
+//{
+//    header("Access-Control-Allow-Origin: $http_Origin");
+//}
+
 (new Dotenv())->bootEnv(dirname(__DIR__).'/.env');
 
 if ($_SERVER['APP_DEBUG']) {
