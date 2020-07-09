@@ -18,6 +18,7 @@ use App\Controller\Api\Post\PostGetOneController;
 /**
  * @ORM\Entity(repositoryClass=PostRepository::class)
  * @ApiResource(
+ *     attributes={"order"={"id": "DESC"}},
  *     collectionOperations={"get", "post",
             "top"={
                 "method"="GET",
@@ -43,7 +44,7 @@ use App\Controller\Api\Post\PostGetOneController;
         },
  *
  * )
- * @ApiFilter(SearchFilter::class, properties={"department":"exact", "tags":"exact", "User":"exact", "validated": "exact", "order"={"id": "DESC"}})
+ * @ApiFilter(SearchFilter::class, properties={"department":"exact", "tags":"exact", "User":"exact", "validated": "exact"})
  */
 class Post
 {
