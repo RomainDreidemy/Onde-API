@@ -43,7 +43,7 @@ use App\Controller\Api\Post\PostGetOneController;
         },
  *
  * )
- * @ApiFilter(SearchFilter::class, properties={"department":"exact", "tags":"exact", "User":"exact", "validated": "exact"})
+ * @ApiFilter(SearchFilter::class, properties={"department":"exact", "tags":"exact", "User":"exact", "validated": "exact", "order"={"id": "DESC"}})
  */
 class Post
 {
