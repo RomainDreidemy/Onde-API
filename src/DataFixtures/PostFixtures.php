@@ -54,27 +54,6 @@ class PostFixtures extends AppFixtures implements DependentFixtureInterface
             $manager->persist($postI);
         }
 
-        foreach ($posts as $post){
-            $postI = (new Post())
-                ->setName($post['name'])
-                ->setDescription($post['description'])
-                ->setDepartment($manager->getRepository(Department::class)->findOneBy(['code' => $post['departement']]))
-                ->addTag($manager->getRepository(Tags::class)->findOneBy(['name' => $post['tags']]))
-                ->setDateCreated($post['dateCreation'])
-                ->setDateEnd($post['dateEnd'])
-                ->setDateMeeting($post['dateMeeting'])
-                ->setValidated(true)
-            ;
-
-            if(!empty($post['partenaire'])){
-                $postI->setUser($manager->getRepository(User::class)->findOneBy(['name' => $post['partenaire']]));
-            }else{
-                $postI->setUser($this->faker->randomElement($manager->getRepository(User::class)->findAll()));
-            }
-
-            $manager->persist($postI);
-        }
-
         $manager->flush();
     }
 
