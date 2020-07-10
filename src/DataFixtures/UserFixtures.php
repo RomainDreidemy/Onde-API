@@ -37,6 +37,16 @@ class UserFixtures extends AppFixtures
             ['email' => 'contact@sosgrandbleau.fr', 'name' => 'SOS Grand Bleu', 'password' => 'partenaire']
         ];
 
+        $user = new User();
+        $user
+            ->setEmail('julie.aube.onde@gmail.com')
+            ->setSurname('Julie')
+            ->setName('Aube')
+            ->setPassword($this->encoder->encodePassword($user, 'ondeProjet'))
+        ;
+
+        $manager->persist($user);
+
         foreach ($usersAdmin as $userAdmin){
             $user = new User();
             $user
