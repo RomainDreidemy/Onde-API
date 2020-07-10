@@ -67,7 +67,7 @@ class SubscriptionAddController extends AbstractController
                         $mail = (new TemplatedEmail())
                             ->from('contact.onde.projet@gmail.com')
                             ->to(new Address($user->getEmail()))
-                            ->subject('Onde - Objectif atteind : ' . $goal->getName())
+                            ->subject('Onde - Objectif atteint : ' . $goal->getName())
                             ->htmlTemplate('mailer/goal-done.html.twig')
                             ->context([
                                 'user' => $user,
